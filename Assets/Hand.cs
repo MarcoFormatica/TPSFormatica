@@ -30,23 +30,24 @@ public class Hand : MonoBehaviour
             {
                 if (character != GetComponentInParent<Character>())
                 {
-                    character.RPC_SetHp(character.Hp - Random.Range(5,20));
+                    character.RPC_SetHp(character.Hp - Random.Range(5, 20));
                 }
 
-            Zombie zombie = c.GetComponentInParent<Zombie>();
-            if (zombie != null)
-            {
-                foreach(Rigidbody r in zombie.GetComponentsInChildren<Rigidbody>())
+                Zombie zombie = c.GetComponentInParent<Zombie>();
+                if (zombie != null)
                 {
-                    r.isKinematic = false;
+                    foreach (Rigidbody r in zombie.GetComponentsInChildren<Rigidbody>())
+                    {
+                        r.isKinematic = false;
+                    }
+                    StartCoroutine(DelayedKillZombie(zombie));
+
                 }
-                StartCoroutine(DelayedKillZombie(zombie));
-                
-            }
-            Rigidbody rigidbody = c.GetComponent<Rigidbody>();
-            if (rigidbody != null)
-            {
-                rigidbody.AddExplosionForce(strength, transform.position, radius);
+                Rigidbody rigidbody = c.GetComponent<Rigidbody>();
+                if (rigidbody != null)
+                {
+                    rigidbody.AddExplosionForce(strength, transform.position, radius);
+                }
             }
         }
     }
