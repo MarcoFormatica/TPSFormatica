@@ -24,6 +24,15 @@ public class Hand : MonoBehaviour
     {
         foreach (Collider c in Physics.OverlapSphere(transform.position, radius))
         {
+
+            Character character = c.GetComponent<Character>();
+            if (character != null)
+            {
+                if (character != GetComponentInParent<Character>())
+                {
+                    character.RPC_SetHp(character.Hp - Random.Range(5,20));
+                }
+
             Zombie zombie = c.GetComponentInParent<Zombie>();
             if (zombie != null)
             {

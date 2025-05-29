@@ -51,9 +51,12 @@ public class Character : NetworkBehaviour
 
     public void GivePunch(int handType)
     {
-        Hand punchingHand = GetComponentsInChildren<Hand>().ToList().Find(x=> x.handType == handType);
-        punchingHand.Punch();
-        
+        if (HasStateAuthority)
+        {
+            Hand punchingHand = GetComponentsInChildren<Hand>().ToList().Find(x => x.handType == handType);
+            punchingHand.Punch();
+        }
+
     }
 
     [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority)]
