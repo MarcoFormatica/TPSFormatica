@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using Fusion;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -12,7 +13,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : NetworkBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -159,16 +160,24 @@ namespace StarterAssets
 
         private void PunchActionCanceled(InputAction.CallbackContext context)
         {
-            GetComponent<Character>().EndPunching();
+            if (HasStateAuthority)
+            {
+
+                GetComponent<Character>().EndPunching();
+            }
         }
 
         private void PunchActionStarted(InputAction.CallbackContext obj)
         {
-            GetComponent<Character>().StartPunching();
+            if (HasStateAuthority)
+            {
+                GetComponent<Character>().StartPunching();
+            }
         }
 
         private void Update()
         {
+            if (HasStateAuthority == false) { return;}
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
@@ -178,6 +187,7 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
+            if (HasStateAuthority == false) { return; }
             CameraRotation();
         }
 
