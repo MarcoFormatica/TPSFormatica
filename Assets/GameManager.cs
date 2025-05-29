@@ -10,9 +10,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour , INetworkRunnerCallbacks
 {
-    private int nemiciUccisi;
     public CinemachineVirtualCamera playerFollowCamera;
-    public GameObject personaggioPrefab;
+    public NetworkObject personaggioPrefab;
     public Transform spawnPointPersonaggio;
 
   
@@ -35,11 +34,12 @@ public class GameManager : MonoBehaviour , INetworkRunnerCallbacks
         args.GameMode = GameMode.Shared;
 
         networkRunner.StartGame(args);
+
     }
 
     private void SpawnPersonaggio()
     {
-       GameObject personaggioSpawnato =  Instantiate(personaggioPrefab, spawnPointPersonaggio.position, spawnPointPersonaggio.rotation);
+       NetworkObject personaggioSpawnato =  GetComponent<NetworkRunner>().Spawn(personaggioPrefab, spawnPointPersonaggio.position, spawnPointPersonaggio.rotation);
        PlayerCameraRoot playerCameraRoot = personaggioSpawnato.GetComponentInChildren<PlayerCameraRoot>();
        playerFollowCamera.Follow = playerCameraRoot.gameObject.transform;
     }
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour , INetworkRunnerCallbacks
     {
 
         Debug.Log("Connesso!");
+        SpawnPersonaggio();
     }
 
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)

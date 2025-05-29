@@ -1,14 +1,28 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : NetworkBehaviour
 {
+
+    [Networked, OnChangedRender(nameof(RefreshHpText))]
+    public int Hp { get; set; }
+
+
+    public override void Spawned()
+    {
+        base.Spawned();
+        RefreshHpText();
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -16,6 +30,12 @@ public class Character : MonoBehaviour
     {
         
     }
+
+    public void RefreshHpText()
+    {
+        GetComponentInChildren<TextMeshPro>().text = Hp.ToString();
+    }
+
 
     public void StartPunching()
     {
@@ -33,5 +53,12 @@ public class Character : MonoBehaviour
     {
         Hand punchingHand = GetComponentsInChildren<Hand>().ToList().Find(x=> x.handType == handType);
         punchingHand.Punch();
+        
+    }
+
+    [Rpc(sources: RpcSources.All, targets: RpcTargets.StateAuthority)]
+    public void RPC_SetHp(int hpToSet)
+    {
+        Hp = hpToSet;
     }
 }
