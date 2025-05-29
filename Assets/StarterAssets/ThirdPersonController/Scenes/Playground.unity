@@ -231,8 +231,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563623821}
-  - component: {fileID: 563623820}
   - component: {fileID: 563623822}
+  - component: {fileID: 563623823}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -240,22 +240,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &563623820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563623819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a01ee2e4cb2f064a908f093a5042617, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerFollowCamera: {fileID: 931910772}
-  personaggioPrefab: {fileID: 4737321424654314167, guid: 0f6ff132dc9bc3c41b2713b3ee2d7df0,
-    type: 3}
-  spawnPointPersonaggio: {fileID: 225807418}
 --- !u!4 &563623821
 Transform:
   m_ObjectHideFlags: 0
@@ -283,6 +267,22 @@ MonoBehaviour:
   m_Script: {fileID: -1199893898, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &563623823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563623819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a01ee2e4cb2f064a908f093a5042617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerFollowCamera: {fileID: 931910772}
+  personaggioPrefab: {fileID: 4479947465980722921, guid: 0f6ff132dc9bc3c41b2713b3ee2d7df0,
+    type: 3}
+  spawnPointPersonaggio: {fileID: 225807418}
 --- !u!1 &714176615
 GameObject:
   m_ObjectHideFlags: 0
